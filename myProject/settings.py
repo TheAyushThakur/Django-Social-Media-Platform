@@ -40,9 +40,11 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.contrib.sites',
     'feed',
+    'profiles',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'sorl.thumbnail',
 ]
 
 MIDDLEWARE = [
