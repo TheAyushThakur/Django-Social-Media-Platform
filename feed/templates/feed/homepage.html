@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-
+{% load thumbnail %}
 {% block title %}Home Page{% endblock title %}
 
 {% block body %}
@@ -8,13 +8,12 @@
     <div class="bg-gray-900/50 pb-16">
         <div class="mx-auto max-w-4xl lg:px-8">
             <div class="mx-auto max-w-2xl lg:mx-0" style="padding-top:10px; padding-bottom:10px;">
-                <h2 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">Latest articles</h2>
-                <p class="mt-2 text-base leading-7 text-gray-600">Stay updated with our latest news and insights.</p>
+                <h2 class="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl">Latest Posts</h2>
             </div>
-            <div class="mx-auto mt-6 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-12 border-t border-gray-300 pt-10 sm:mt-10 sm:pt-12 lg:mx-0 lg:max-w-none" style="margin-top:5px">
+            <div class="mx-auto mt-6 grid max-w-2xl grid-cols-1 gap-x-8 gap-y-6 border-t border-gray-300 pt-10 sm:mt-10 sm:pt-12 lg:mx-0 lg:max-w-none" style="margin-top:5px">
                 {% for post in posts %}
                 <!-- Article -->
-                <article class="flex max-w-xl flex-col items-start justify-between bg-white rounded-lg p-4 shadow-sm">
+                <article class="flex w-full flex-col items-start justify-between bg-white rounded-lg p-4 shadow-sm">
                     <div class="flex items-center gap-x-4 text-xs">
                         <span class="text-gray-500">{{ post.date|date:"F j, Y, g:i:a" }}</span>
                     </div>
@@ -29,17 +28,18 @@
                             read more
                         </a>
                     </div>
-                    {# TODO: Add author details #}
+                    {# TODO: Add link to author profile #}
                     <div class="relative mt-6 flex items-center gap-x-4 justify-self-end">
-                        <img src="{{ post.author.image_url }}" alt="{{ post.author.name }}" class="h-10 w-10 rounded-full bg-gray-200" />
+                            {% thumbnail post.author.profile.image "100x100" crop="center" as im %}
+                                <img src="{{ im.url }}" class="h-12 w-12 rounded-full bg-gray-200">
+                            {% endthumbnail %}
                         <div class="text-sm">
                             <p class="font-semibold text-gray-900">
-                                <a href="#">
                                     <span class="absolute inset-0"></span>
-                                    Author Name
-                                </a>
+                                  <i>
+                                     {{ post.author }}
+                                  </i> 
                             </p>
-                            <p class="text-gray-500">Author role</p>
                         </div>
                     </div>
                 
