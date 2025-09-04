@@ -39,6 +39,10 @@
 
                 <a href="{% url 'account_logout' %}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white {% if request.path == '/logout/' %}bg-gray-950/50{% endif %}">
                 <i class='bx  bx-log-out'></i> Logout</a> 
+                
+                <a href="{% url 'feed:new_post' %}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white {% if request.path == '/new/' %}bg-gray-950/50{% endif %}">
+                <i class='bx bx-layer-plus' ></i>  New Post</a> 
+
 
             {% else %}
                 <a href="{% url 'account_login' %}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white {% if request.path == '/login/' %}bg-gray-950/50{% endif %}"><i class='bx  bx-log-in'></i>Login</a>
