@@ -27,19 +27,13 @@
                             See complete post...
                         </a>
                     </div>
-                    {# TODO: Add link to author profile #}
-                    <div class="relative mt-6 flex items-center gap-x-4 justify-self-end">
-                            {% thumbnail post.author.profile.image "100x100" crop="center" as im %}
-                                <img src="{{ im.url }}" class="h-12 w-12 rounded-full bg-gray-200">
+                    <div class="my-5">
+                        <a class="flex items-center" href="{% url 'profiles:detail' post.author.username %}">
+                            {% thumbnail post.author.profile.image "373x373" crop="center" as im %}
+                                <img class="mr-4 w-10 h-10 object-cover rounded-full hidden sm:block" src="{{ im.url }}" alt="avatar">
                             {% endthumbnail %}
-                        <div class="text-sm">
-                            <p class="font-semibold text-gray-900">
-                                    <span class="absolute inset-0"></span>
-                                  <i>
-                                     {{ post.author }}
-                                  </i> 
-                            </p>
-                        </div>
+                            <h1 class="text-gray-700 font-bold hover:underline">{{ post.author.username }}</h1>
+                        </a>
                     </div>
                 
                 </article>
