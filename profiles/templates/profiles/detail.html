@@ -15,17 +15,16 @@
 		<h3 class="text-black text-sm bold font-sans">{{ user.username }}</h3>
 	</div>
     {% if request.user.is_authenticated %} 
+      {% if request.user != user %} 
         <div class="mb-5">
                   <button class="bg-white text-gray-800 font-bold rounded border-b-2 border-blue-500 hover:border-blue-600 hover:bg-blue-500 hover:text-white shadow-md py-2 inline-flex items-center js-follow" data-username="{{user.username}}" style="margin-left:65px;padding-left:50px; padding-right: 50px;" type="button">
                       <span class="mr-2 js-follow-text">Follow</span>
-                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
-                          <path fill="currentcolor" d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path>
-                      </svg>
                   </button>
           </div>
-      {% else %}
-       <div class="mb-5" style="margin-left:65px;"><i>Login to follow this user!</i></div>
       {% endif %}
+    {% else %}
+       <div class="mb-5" style="margin-left:65px;"><i>Login to follow this user!</i></div>
+    {% endif %}
 
   	<div class="flex justify-center pb-3 text-grey-dark">
       <div class="text-center mr-3 border-r pr-3 bold">
