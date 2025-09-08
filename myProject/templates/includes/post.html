@@ -1,0 +1,19 @@
+{% load thumbnail %}
+        <article class="flex w-full flex-col items-start justify-between bg-gray-900/50 rounded-lg p-4 shadow-sm">
+            <div>
+            <a class="flex items-center" href="{% url 'profiles:detail' post.author.username %}">
+                {% thumbnail post.author.profile.image "373x373" crop="center" as im %}
+                    <img class="mx-4 w-10 h-10 object-cover rounded-full hidden sm:block" src="{{ im.url }}" alt="avatar">
+                {% endthumbnail %}
+                <h1 class="text-white-500 font-bold hover:underline" >{{ post.author.username }}</h1>
+            </a>
+        </div>
+                <div class="group relative grow">
+                            <p class="mt-6 mb-6 text-lg font-semibold text-white break-words">
+                                {{ post.text }}
+                            </p>
+                </div>  
+                    <div class="flex items-center gap-x-4 text-xs">
+                        <span class="text-white"><i>{{ post.date|date:"F j, Y, g:i:a" }}</i></span>
+                    </div>      
+        </article>
