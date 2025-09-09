@@ -1,0 +1,139 @@
+{% extends "account/base_entrance.html" %}
+{% load i18n %}
+{% load allauth %}
+
+{% block head_title %}
+    {% trans "Sign Up" %}
+{% endblock head_title %}
+
+{% block body %}
+<div class="bg-gray-900/50 py-5 flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-md p-8 mx-4 bg-gray-800/70 rounded-xl shadow-lg">
+        <div class="text-center mb-8">
+            <h2 class="text-2xl font-bold text-gray-50">Create your account</h2>
+        </div>
+
+        <!-- Display form errors -->
+        {% if form.non_field_errors %}
+        <div class="mb-6 p-4 bg-red-900/50 text-red-100 rounded-md">
+            {% for error in form.non_field_errors %}
+                <p class="text-sm">{{ error }}</p>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Signup Form -->
+        {% url 'account_signup' as action_url %}
+        <form method="POST" action="{{ action_url }}" class="space-y-6">
+            {% csrf_token %}
+            
+            <!-- Username Field -->
+            <div>
+                <label for="id_username" class="block text-sm font-medium text-gray-100 mb-2">
+                    {% trans "Username" %}
+                </label>
+                <div>
+                    <input 
+                        id="id_username" 
+                        type="text" 
+                        name="username" 
+                        placeholder="{% trans 'Choose a username' %}" 
+                        required
+                        class="block w-full rounded-md bg-white/5 px-4 py-3 text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500" 
+                        value="{{ form.username.value|default_if_none:'' }}"
+                    />
+                </div>
+                {% if form.username.errors %}
+                    <p class="mt-2 text-sm text-red-400">{{ form.username.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Email Field -->
+            <div>
+                <label for="id_email" class="block text-sm font-medium text-gray-100 mb-2">
+                    {% trans "Email Address" %}
+                </label>
+                <div>
+                    <input 
+                        id="id_email" 
+                        type="email" 
+                        name="email" 
+                        placeholder="{% trans 'Enter your email' %}" 
+                        required
+                        class="block w-full rounded-md bg-white/5 px-4 py-3 text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500" 
+                        value="{{ form.email.value|default_if_none:'' }}"
+                    />
+                </div>
+                {% if form.email.errors %}
+                    <p class="mt-2 text-sm text-red-400">{{ form.email.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            <!-- Password Field -->
+            <div>
+                <label for="id_password1" class="block text-sm font-medium text-gray-100 mb-2">
+                    {% trans "Password" %}
+                </label>
+                <div>
+                    <input 
+                        id="id_password1" 
+                        type="password" 
+                        name="password1" 
+                        placeholder="{% trans 'Create a password' %}" 
+                        required
+                        class="block w-full rounded-md bg-white/5 px-4 py-3 text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500" 
+                    />
+                </div>
+                {% if form.password1.errors %}
+                    <p class="mt-2 text-sm text-red-400">{{ form.password1.errors.0 }}</p>
+                {% endif %}
+                
+                <!-- Password help text -->
+                <div class="mt-2 text-xs text-gray-400">
+                    <p>{% trans "Your password must contain at least 8 characters." %}</p>
+                    <p>{% trans "Your password can't be too common or entirely numeric." %}</p>
+                </div>
+            </div>
+
+            <!-- Password Confirmation Field -->
+            <div>
+                <label for="id_password2" class="block text-sm font-medium text-gray-100 mb-2">
+                    {% trans "Confirm Password" %}
+                </label>
+                <div>
+                    <input 
+                        id="id_password2" 
+                        type="password" 
+                        name="password2" 
+                        placeholder="{% trans 'Confirm your password' %}" 
+                        required
+                        class="block w-full rounded-md bg-white/5 px-4 py-3 text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500" 
+                    />
+                </div>
+                {% if form.password2.errors %}
+                    <p class="mt-2 text-sm text-red-400">{{ form.password2.errors.0 }}</p>
+                {% endif %}
+            </div>
+
+            {% if redirect_field_value %}
+                <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+            {% endif %}
+
+            <!-- Submit Button -->
+            <div>
+                <button type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-4 py-3 text-sm font-semibold text-white hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                    {% trans "Create Account" %}
+                </button>
+            </div>
+        </form>
+
+        <!-- Login Link -->
+        <p class="mt-8 text-center text-sm text-gray-300">
+            {% trans "Already have an account?" %}
+            <a href="{% url 'account_login' %}" class="font-semibold text-indigo-300 hover:underline ml-1">
+                {% trans "Sign in here" %}
+            </a>
+        </p>
+    </div>
+</div>
+{% endblock body %}

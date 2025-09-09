@@ -47,7 +47,7 @@
 
 
             {% else %}
-                <a href="{% url 'account_login' %}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white {% if request.path == '/login/' %}bg-gray-950/50{% endif %}"><i class='bx  bx-log-in'></i>Login</a>
+                <a href="{% url 'account_login' %}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white {% if request.path == '/login/' %}bg-gray-950/50{% endif %}"><i class='bx  bx-log-in'></i>Sign In</a>
 
                 <a href="{% url 'account_signup' %}" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white {% if request.path == '/signup/' %}bg-gray-950/50{% endif %}"><i class='bx bx-user-plus'></i>SignUp</a>
             {% endif %}

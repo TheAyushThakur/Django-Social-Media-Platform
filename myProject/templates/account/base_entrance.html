@@ -1,15 +1,17 @@
     {% extends "base.html" %}
 
         {% block body %}
-            {% if messages %}
-                <div>
-                    <strong>Messages:</strong>
-                        <ul>
-                            {% for message in messages %}
-                                <li>{{ message }}</li>
-                            {% endfor %}
-                        </ul>
-                </div>
-            {% endif %}
-            {% block content %}{% endblock content %}
+           <div class="bg-gray-900/50 py-5 items-center"> 
+                {% if messages %}
+                    <div>
+                        <strong>Messages:</strong>
+                            <ul>
+                                {% for message in messages %}
+                                    <li>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                    </div>
+                {% endif %}
+                {% block content %}{% endblock content %}
+            </div>
         {% endblock body %}
