@@ -136,6 +136,7 @@ STATIC_URL = "/static/"
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+EMAIL_BACKEND = "django.core.mail.backends.console.EmailBackend"
 SITE_ID= 1
 LOGIN_URL='/login/'
 LOGIN_REDIRECT_URL='/'

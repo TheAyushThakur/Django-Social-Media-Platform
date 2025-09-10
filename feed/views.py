@@ -82,5 +82,5 @@ class PostCreateView(LoginRequiredMixin, CreateView):
                 "post": post,
                 "show_detail_link": True,
             },
-            content_type="application/html"
+            content_type="text/html"
         )
