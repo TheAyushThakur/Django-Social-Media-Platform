@@ -26,7 +26,6 @@
         {% url 'account_login' as action_url %}
         <form method="POST" action="{{ action_url }}" class="space-y-6">
             {% csrf_token %}
-            
             <!-- Login Field (username) -->
             <div>
                 <label for="id_login" class="block text-sm font-medium text-gray-100 mb-2">
