@@ -1,9 +1,11 @@
 from django.contrib.auth.models import User
 from django.views.generic import DetailView, View
+from django.views.generic.edit import UpdateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from feed.models import Post
 from django.http import JsonResponse, HttpResponseBadRequest
 from followers.models import Follower
+from .models import Profile
 class ProfileDetailView(DetailView):
     http_method_names=['get']
     template_name='profiles/detail.html'
@@ -61,3 +63,4 @@ class FollowView(LoginRequiredMixin, View):
             'success': True,
             'wording': "Unfollow" if data['action']=="follow" else "Follow"
         })
+    

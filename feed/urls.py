@@ -7,4 +7,5 @@ urlpatterns = [
     path('', views.HomePageView.as_view(), name='index'),
     path('<int:pk>/', views.PostDetailView.as_view(), name='detail'),
     path('new/', views.PostCreateView.as_view(), name='new_post'),
+    path("edit_profile/", views.EditProfileView.as_view(), name='edit_profile'),
 ]

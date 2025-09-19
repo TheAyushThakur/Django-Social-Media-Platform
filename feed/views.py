@@ -1,11 +1,11 @@
 from django.shortcuts import render
 from django.views.generic import DetailView, TemplateView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 from .models import Post
 from django.contrib.auth.mixins import LoginRequiredMixin
 from followers.models import Follower
 from django.db.models import Q
-
+from profiles.models import Profile
 # Create your views here.
 class HomePageView(TemplateView):
     http_method_names = ['get']
@@ -84,3 +84,13 @@ class PostCreateView(LoginRequiredMixin, CreateView):
             },
             content_type="text/html"
         )
+    
+class EditProfileView(LoginRequiredMixin, UpdateView):
+    model = Profile
+    template_name = "profiles/edit_profile.html"
+    fields = ["image"]  # Add more fields later (bio, location, etc.)
+    success_url = "/"
+
+    def get_object(self, queryset=None):
+        # Always return the profile of the logged-in user
+        return self.request.user.profile
