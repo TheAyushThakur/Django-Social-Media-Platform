@@ -6,6 +6,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from followers.models import Follower
 from django.db.models import Q
 from profiles.models import Profile
+from profiles.forms import EditProfileForm
 # Create your views here.
 class HomePageView(TemplateView):
     http_method_names = ['get']
@@ -68,29 +69,29 @@ class PostCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
     
     def post(self, request, *args, **kwargs):
-        # TODO: There is a bug here when you go to /new/ to create a post.
-        # You must figure out how to determine if this is an Ajax request (or not an ajax request).
         post = Post.objects.create(
             text=request.POST.get("text"),
             author=request.user,
         )
 
+        # render only the card, not the detail template
         return render(
             request,
-            "includes/post.html",
-            {
-                "post": post,
-                "show_detail_link": True,
-            },
+            "feed/post_card.html",
+            {"post": post},
             content_type="text/html"
         )
     
 class EditProfileView(LoginRequiredMixin, UpdateView):
     model = Profile
+    form_class = EditProfileForm
     template_name = "profiles/edit_profile.html"
-    fields = ["image"]  # Add more fields later (bio, location, etc.)
-    success_url = "/"
+    success_url ='/' 
 
     def get_object(self, queryset=None):
-        # Always return the profile of the logged-in user
         return self.request.user.profile
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs["user"] = self.request.user
+        return kwargs
